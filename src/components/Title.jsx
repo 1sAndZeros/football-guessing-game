@@ -1,5 +1,5 @@
 function Title() {
-  return <div className="text-5xl">Football Guessing Game</div>;
+  return <h1 className="text-4xl">Football Guessing Game</h1>;
 }
 
 export default Title;

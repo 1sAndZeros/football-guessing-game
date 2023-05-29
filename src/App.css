@@ -1,13 +1,15 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 
 }
 
 .App {
-  background-color: var(--clr-primary);
   padding: 1.5rem;
-  border-radius: 2rem;
+  background: rgba(24, 94, 102, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }

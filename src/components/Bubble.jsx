@@ -1,17 +1,21 @@
-function Bubble({ stat, name }) {
+function Bubble({ stat, name, type, correct }) {
   let answer;
-  if (stat.guessed === stat.correct) {
+  if (correct) {
     answer = 'correct';
-  } else if (stat.guessed > stat.correct && stat.type === 'number') {
+  } else if (stat.guessed > stat.correct && type === 'number') {
     answer = 'down-arrow';
-  } else if (stat.guessed < stat.correct && stat.type === 'number') {
+  } else if (stat.guessed < stat.correct && type === 'number') {
     answer = 'up-arrow';
   } else {
     answer = 'incorrect';
   }
 
   return (
-    <div className={`placeholder avatar icon ${answer} ${name}`}>
+    <div
+      className={`placeholder avatar icon ${
+        correct ? 'correct' : ''
+      } ${answer} ${name}`}
+    >
       <div className="bg-neutral text-neutral-content rounded-full w-20 m-1">
         {stat.type === 'image' ? (
           <img className="w-5" alt={stat.guessed} src={stat.guessed} />

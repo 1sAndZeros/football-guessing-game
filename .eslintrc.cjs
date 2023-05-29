@@ -26,6 +26,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 0,
+    'no-console': 'off',
     'react/prop-types': 0,
     'react/no-array-index-key': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
