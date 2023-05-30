@@ -1,0 +1,4 @@
+[[redirects]]
+from = "/players"
+to = "/.netlify/functions/players"
+status = 200

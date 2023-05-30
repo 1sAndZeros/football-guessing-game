@@ -22,8 +22,9 @@ function App() {
   }
 
   function fetchPlayers() {
+    const url = import.meta.env.VITE_FOOTBALLERS_URL;
     setLoading(true);
-    fetch(import.meta.env.VITE_FOOTBALLERS_URL)
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         const filteredData = data.filter(
