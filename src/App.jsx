@@ -105,7 +105,11 @@ function App() {
           })}
       </div>
       {!won && !gameOver && !loading && (
-        <SearchBox players={players} handleSubmit={handleSubmit} />
+        <SearchBox
+          players={players}
+          handleSubmit={handleSubmit}
+          noOfGuesses={noOfGuesses}
+        />
       )}
       {noOfGuesses >= 6 ? (
         <>

@@ -16,7 +16,7 @@ function Bubble({ stat, name, type, correct }) {
         correct ? 'correct' : ''
       } ${answer} ${name}`}
     >
-      <div className="bg-neutral text-neutral-content rounded-full w-20 m-1">
+      <div className="bubble text-neutral-content rounded-full w-20 m-1">
         {stat.type === 'image' ? (
           <img className="w-5" alt={stat.guessed} src={stat.guessed} />
         ) : (

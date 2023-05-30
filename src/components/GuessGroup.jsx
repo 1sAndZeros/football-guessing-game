@@ -88,13 +88,13 @@ function GuessGroup({ guess, footballer }) {
         type="image"
         correct={guessedStats.team.name === correctStats.team.name}
       />
-      <Bubble
+      {/* <Bubble
         key="League"
         name="league"
         stat={statObj.league}
         type="image"
         correct={guessedStats.league.name === correctStats.league.name}
-      />
+      /> */}
       <Bubble
         key="Age"
         name="age"

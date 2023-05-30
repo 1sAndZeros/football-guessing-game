@@ -2,7 +2,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
-function SearchBox({ players, handleSubmit }) {
+function SearchBox({ players, handleSubmit, noOfGuesses }) {
   const options = players.map((player) => {
     return {
       id: player.player.id,
@@ -22,7 +22,6 @@ function SearchBox({ players, handleSubmit }) {
             autoHighlight
             getOptionLabel={(option) => option.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
-            // sx={{ width: 300 }}
             renderOption={(props, option) => (
               <Box
                 component="li"
@@ -36,7 +35,7 @@ function SearchBox({ players, handleSubmit }) {
                 <img
                   loading="lazy"
                   className="rounded-full"
-                  width="80"
+                  width="50"
                   src={option.photo}
                   alt={option.name}
                 />
@@ -49,11 +48,8 @@ function SearchBox({ players, handleSubmit }) {
             )}
           />
         )}
-        <button
-          type="submit"
-          className="text-white absolute right-2.5 bottom-2.5 bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Guess
+        <button type="submit" className="guess-btn">
+          {`Guess ${noOfGuesses + 1} of 6`}
         </button>
       </div>
     </form>
