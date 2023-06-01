@@ -1,7 +1,10 @@
 import Bubble from './Bubble';
 import positions from '../data/positions';
+import { animate, motion, stagger } from 'framer-motion';
+import { useEffect } from 'react';
 
 function GuessGroup({ guess, footballer }) {
+
   const guessedStats = {
     id: guess.player.id,
     name: guess.player.name,
@@ -70,7 +73,7 @@ function GuessGroup({ guess, footballer }) {
   };
 
   return (
-    <div className="guess-group">
+    <motion.div className="guess-group">
       {/* {Object.keys(statObj).map((stat, index) => {
         return <Bubble key={index} name={stat} stat={statObj[stat]} />;
       })} */}
@@ -116,7 +119,7 @@ function GuessGroup({ guess, footballer }) {
         type="text"
         correct={guessedStats.position === correctStats.position}
       />
-    </div>
+    </motion.div>
   );
 }
 

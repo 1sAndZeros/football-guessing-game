@@ -1,11 +1,9 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Title from './components/Title';
 import GuessGroup from './components/GuessGroup';
 import SearchBox from './components/SearchBox';
 import PlayerCard from './components/PlayerCard';
-import useCustomFetch from './utils/useCustomFetch';
-// import apiCall from './utils/apiCall';
 
 function App() {
   const [footballer, setFootballer] = useState();
@@ -73,6 +71,7 @@ function App() {
     const guessedPlayer = players.find((player) => player.player.name === name);
     if (guessedPlayer.player.name === footballer.player.name) {
       setWon(true);
+      setGameOver(true);
     }
     setGuesses((prevGuesses) => [...prevGuesses, guessedPlayer]);
     setNoOfGuesses((prev) => {
@@ -104,28 +103,24 @@ function App() {
             return <GuessGroup key={i} guess={guess} footballer={footballer} />;
           })}
       </div>
-      {!won && !gameOver && !loading && (
+      {!gameOver && !loading && (
         <SearchBox
           players={players}
           handleSubmit={handleSubmit}
           noOfGuesses={noOfGuesses}
         />
       )}
-      {noOfGuesses >= 6 ? (
-        <>
-          {won ? (
-            <h2 className="won">{`CONGRATS, YOU WON IN ${noOfGuesses} ${
-              noOfGuesses > 1 ? 'GUESSES' : 'GUESS'
-            }`}</h2>
-          ) : (
-            <h2 className="lost">SORRY, YOU LOST</h2>
-          )}
-          <button type="button" className="btn" onClick={playAgain}>
-            Play Again
-          </button>
-        </>
+      {won ? (
+        <h2 className="won">{`CONGRATS, YOU WON IN ${noOfGuesses} ${
+          noOfGuesses > 1 ? 'GUESSES' : 'GUESS'
+        }`}</h2>
       ) : (
-        <h3 className="guess-number">{`Guesses: ${noOfGuesses}`}</h3>
+        <h2 className="lost">SORRY, YOU LOST</h2>
+      )}
+      {gameOver && (
+        <button type="button" className="btn" onClick={playAgain}>
+          Play Again
+        </button>
       )}
     </div>
   );
