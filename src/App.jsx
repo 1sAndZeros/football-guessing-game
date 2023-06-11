@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import Title from './components/Title';
 import GuessGroup from './components/GuessGroup';
@@ -39,14 +39,14 @@ function App() {
     fetchPlayers();
   }, []);
 
-  function randomFootballer() {
+  const randomFootballer = useCallback(() => {
     const i = getRandomInt(players.length);
     setFootballer(players[i]);
-  }
+  }, [players]);
 
   useEffect(() => {
     randomFootballer();
-  }, [players]);
+  }, [players, randomFootballer]);
 
   useEffect(() => {
     if (noOfGuesses >= 6) {
@@ -57,10 +57,9 @@ function App() {
   useEffect(() => {
     const lastGuess = guesses[guesses.length - 1];
     if (!loading && footballer && lastGuess === footballer.player.name) {
-      console.log(`YOU WON IN ${noOfGuesses} GUESSES`);
       setWon(true);
     } else if (noOfGuesses >= 6) {
-      console.log('YOU LOSE!');
+      setGameOver(true);
     }
   }, [guesses, footballer, noOfGuesses, loading]);
 
@@ -110,18 +109,30 @@ function App() {
           noOfGuesses={noOfGuesses}
         />
       )}
-      {won ? (
+      {won && (
         <h2 className="won">{`CONGRATS, YOU WON IN ${noOfGuesses} ${
           noOfGuesses > 1 ? 'GUESSES' : 'GUESS'
         }`}</h2>
-      ) : (
-        <h2 className="lost">SORRY, YOU LOST</h2>
       )}
+      {gameOver && !won && <h2 className="lost">SORRY, YOU LOST</h2>}
       {gameOver && (
         <button type="button" className="btn" onClick={playAgain}>
           Play Again
         </button>
       )}
+      <p>
+        <a
+          target="_blank"
+          href="https://icons8.com/icon/hNYQ5vbTYIrD/soccer"
+          rel="noreferrer"
+        >
+          Soccer
+        </a>{' '}
+        icon by{' '}
+        <a target="_blank" href="https://icons8.com" rel="noreferrer">
+          Icons8
+        </a>
+      </p>
     </div>
   );
 }

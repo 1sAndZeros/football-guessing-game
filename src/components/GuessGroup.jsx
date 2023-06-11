@@ -1,9 +1,17 @@
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import Bubble from './Bubble';
 import positions from '../data/positions';
-import { animate, motion, stagger } from 'framer-motion';
-import { useEffect } from 'react';
+import flags from '../data/flags.json';
 
 function GuessGroup({ guess, footballer }) {
+  let flag = '';
+  Object.keys(flags).forEach((key) => {
+    console.log(guess.player.nationality);
+    if (flags[key].name === guess.player.nationality) {
+      flag = flags[key].image;
+    }
+  });
 
   const guessedStats = {
     id: guess.player.id,
@@ -18,7 +26,11 @@ function GuessGroup({ guess, footballer }) {
       logo: guess.statistics[0].league.logo,
     },
     age: guess.player.age,
-    nationality: guess.player.nationality,
+    nationality: {
+      name: guess.player.nationality,
+      logo: flag,
+    },
+
     position: guess.statistics[0].games.position,
   };
 
@@ -61,9 +73,9 @@ function GuessGroup({ guess, footballer }) {
       type: 'number',
     },
     nationality: {
-      correct: correctStats.nationality,
-      guessed: guessedStats.nationality,
-      type: 'text',
+      correct: correctStats.nationality.logo,
+      guessed: guessedStats.nationality.logo,
+      type: 'image',
     },
     position: {
       correct: positions[correctStats.position],

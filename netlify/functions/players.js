@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const data = require('../../src/data/db.json');
 
 exports.handler = async (event, context) => {

@@ -116,6 +116,7 @@ body {
   font-size: 1.5rem;
   margin: 2rem auto;
   display: flex;
+  flex-direction: column;
   border-radius: 1.5rem;
   overflow: hidden;
   padding: 1.5rem;
@@ -136,11 +137,8 @@ body {
   gap: 1.5rem;
 }
 
-.player-card .details h3 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.player-name {
+  overflow-wrap: break-word;
 }
 
 .player-card.hidden .player-name, .player-card.hidden .details {
@@ -153,11 +151,9 @@ body {
   filter: blur(15px);
 }
 
-.player-card .player img {
-  width: 150px;
+.player-card .player :first-child {
   margin: 0 auto;
   border-radius: 9999px;
-  margin-bottom: 1rem;
   transition: all 1500ms;
 }
 
@@ -182,11 +178,7 @@ body {
 .guess-btn {
   background-color: var(--clr-accent);
   color: black;
-  position: absolute;
-  /* inset: 0.25rem 0.25rem 0.25rem auto; */
-  inset: 100% 0 auto 0;
   width: 100%;
-  margin-top: 0.5rem;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   transition: 500ms;
