@@ -13,10 +13,6 @@ function PlayerCard({ player, gameOver }) {
     }
   });
 
-  console.log(flag.image);
-
-  gameOver = true;
-
   return (
     <div
       className={`player-card flex justify-center align-middle ${
