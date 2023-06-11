@@ -35,7 +35,11 @@ function PlayerCard({ player, gameOver }) {
       >
         {age}
       </h3>
-      <div className="grid place-items-center absolute bottom-2 left-2 bg-slate-600 w-16 h-16 rounded-full">
+      <div
+        className={`grid place-items-center absolute ${
+          !gameOver ? 'invisible' : ''
+        } bottom-2 left-2 bg-slate-600 w-16 h-16 rounded-full`}
+      >
         <h3 className="">{position}</h3>
       </div>
       <img

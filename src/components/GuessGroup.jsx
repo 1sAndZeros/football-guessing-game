@@ -7,7 +7,6 @@ import flags from '../data/flags.json';
 function GuessGroup({ guess, footballer }) {
   let flag = '';
   Object.keys(flags).forEach((key) => {
-    console.log(guess.player.nationality);
     if (flags[key].name === guess.player.nationality) {
       flag = flags[key].image;
     }
@@ -47,7 +46,9 @@ function GuessGroup({ guess, footballer }) {
       logo: footballer.statistics[0].league.logo,
     },
     age: footballer.player.age,
-    nationality: footballer.player.nationality,
+    nationality: {
+      name: footballer.player.nationality,
+    },
     position: footballer.statistics[0].games.position,
   };
 
@@ -103,13 +104,6 @@ function GuessGroup({ guess, footballer }) {
         type="image"
         correct={guessedStats.team.name === correctStats.team.name}
       />
-      {/* <Bubble
-        key="League"
-        name="league"
-        stat={statObj.league}
-        type="image"
-        correct={guessedStats.league.name === correctStats.league.name}
-      /> */}
       <Bubble
         key="Age"
         name="age"
@@ -122,7 +116,9 @@ function GuessGroup({ guess, footballer }) {
         name="nationality"
         stat={statObj.nationality}
         type="text"
-        correct={guessedStats.nationality === correctStats.nationality}
+        correct={
+          guessedStats.nationality.name === correctStats.nationality.name
+        }
       />
       <Bubble
         key="Position"
