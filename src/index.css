@@ -187,3 +187,13 @@ body {
 .guess-btn:hover, .guess-btn:focus {
   background-color: hsl(187, 98%, 45%);
 }
+
+#search-box {
+  color: white;
+  border: greenyellow;
+}
+
+label[for=search-box] {
+  color: white;
+  border-color: blueviolet;
+}

@@ -8,6 +8,7 @@ function SearchBox({ players, handleSubmit, noOfGuesses }) {
       id: player.player.id,
       name: player.player.name,
       photo: player.player.photo,
+      team: player.statistics[0].team.logo,
     };
   });
   return (
@@ -15,12 +16,12 @@ function SearchBox({ players, handleSubmit, noOfGuesses }) {
       <div className="relative">
         {options && (
           <Autocomplete
-            // disablePortal
+            disablePortal
             id="search-box"
             name="searchBox"
             options={options}
             autoHighlight
-            getOptionLabel={(option) => option.name}
+            getOptionLabel={(option) => `${option.name}`}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderOption={(props, option) => (
               <Box
@@ -40,11 +41,24 @@ function SearchBox({ players, handleSubmit, noOfGuesses }) {
                   alt={option.name}
                 />
                 {option.name}
+                <img
+                  loading="lazy"
+                  className="ml-3"
+                  width="25"
+                  src={option.team}
+                  alt={option.team}
+                />
               </Box>
             )}
             // eslint-disable-next-line react/jsx-props-no-spreading
             renderInput={(params) => (
-              <TextField {...params} label="Guess a Player" />
+              <TextField
+                {...params}
+                label="Guess a Player"
+                variant="filled"
+                color="info"
+                className="input-box"
+              />
             )}
           />
         )}
