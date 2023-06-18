@@ -1,20 +1,7 @@
-import { motion, stagger, animate } from 'framer-motion';
-import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
-function Bubble({ stat, name, type, correct }) {
-  useEffect(() => {
-    animate(
-      '.avatar',
-      {
-        opacity: 1,
-        scale: [0, 1.5, 1],
-        transition: {
-          staggerChildren: 0.5,
-        },
-      },
-      { delay: stagger(0.2) }
-    );
-  }, []);
+function Bubble(props) {
+  const { stat, name, type, correct } = props;
 
   let answer;
   if (correct) {
@@ -29,10 +16,13 @@ function Bubble({ stat, name, type, correct }) {
 
   return (
     <motion.div
+      animate={{
+        opacity: 1,
+        scale: [0, 1.5, 1],
+      }}
       className={`placeholder avatar icon ${
         correct ? 'correct' : ''
       } ${answer} ${name}`}
-      // initial={{ opacity: 0 }}
     >
       <div className="bubble text-neutral-content rounded-full w-20 m-1">
         {stat.type === 'image' ? (

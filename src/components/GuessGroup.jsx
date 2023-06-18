@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { motion, animate, stagger } from 'framer-motion';
 import Bubble from './Bubble';
 import positions from '../data/positions';
 import flags from '../data/flags.json';
+import useTraceUpdate from '../utils/useTraceUpdate';
 
 function GuessGroup({ guess, footballer }) {
   let flag = '';
@@ -11,6 +12,8 @@ function GuessGroup({ guess, footballer }) {
       flag = flags[key].image;
     }
   });
+
+  useTraceUpdate({ guess, footballer });
 
   const guessedStats = {
     id: guess.player.id,
@@ -91,28 +94,28 @@ function GuessGroup({ guess, footballer }) {
         return <Bubble key={index} name={stat} stat={statObj[stat]} />;
       })} */}
       <Bubble
-        key={guessedStats.id}
+        key={`${guessedStats.id}-player`}
         name="player"
         stat={statObj.photo}
         type="image"
         correct={guessedStats.name === correctStats.name}
       />
       <Bubble
-        key="Team"
+        key={`${guessedStats.id}-team`}
         name="team"
         stat={statObj.team}
         type="image"
         correct={guessedStats.team.name === correctStats.team.name}
       />
       <Bubble
-        key="Age"
+        key={`${guessedStats.id}-age`}
         name="age"
         stat={statObj.age}
         type="number"
         correct={guessedStats.age === correctStats.age}
       />
       <Bubble
-        key="Nationality"
+        key={`${guessedStats.id}-nationality`}
         name="nationality"
         stat={statObj.nationality}
         type="text"
@@ -121,7 +124,7 @@ function GuessGroup({ guess, footballer }) {
         }
       />
       <Bubble
-        key="Position"
+        key={`${guessedStats.id}-position`}
         name="position"
         stat={statObj.position}
         type="text"
