@@ -49,7 +49,7 @@ function App() {
   }, [players, randomFootballer]);
 
   useEffect(() => {
-    if (noOfGuesses >= 6) {
+    if (noOfGuesses >= 8) {
       setGameOver(true);
     }
   }, [noOfGuesses]);
@@ -58,7 +58,7 @@ function App() {
     const lastGuess = guesses[guesses.length - 1];
     if (!loading && footballer && lastGuess === footballer.player.name) {
       setWon(true);
-    } else if (noOfGuesses >= 6) {
+    } else if (noOfGuesses >= 8) {
       setGameOver(true);
     }
   }, [guesses, footballer, noOfGuesses, loading]);
