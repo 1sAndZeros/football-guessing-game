@@ -113,6 +113,7 @@ function App() {
     setGameOver(false);
     setGuesses([]);
     setNoOfGuesses(0);
+    setPlayers(premPlayers);
     setFootballer();
     randomFootballer();
   }
