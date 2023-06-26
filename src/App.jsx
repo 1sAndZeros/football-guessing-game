@@ -4,43 +4,55 @@ import Title from './components/Title';
 import GuessGroup from './components/GuessGroup';
 import SearchBox from './components/SearchBox';
 import PlayerCard from './components/PlayerCard';
+import premPlayers from './data/players';
 
 function App() {
   const [footballer, setFootballer] = useState();
   const [won, setWon] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState(premPlayers);
   const [guesses, setGuesses] = useState([]);
   const [noOfGuesses, setNoOfGuesses] = useState(0);
+  const [inputValue, setInputValue] = useState('');
+  const [actualValue, setActualValue] = useState(null);
+  const maxGuesses = 8;
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
 
-  function fetchPlayers() {
-    const url = import.meta.env.VITE_FOOTBALLERS_URL;
-    setLoading(true);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        const filteredData = data.filter(
-          (v, i, a) => a.findIndex((v2) => v2.player.id === v.player.id) === i
-        );
-        filteredData.sort((a, b) => (a.player.name > b.player.name ? 1 : -1));
-        setPlayers(filteredData);
-      })
-      .catch((err) => setError(err));
-    setLoading(false);
-  }
+  // function fetchPlayers() {
+  //   const url = import.meta.env.VITE_FOOTBALLERS_URL;
+  //   setLoading(true);
+  //   fetch(url)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const filteredData = data.filter(
+  //         (v, i, a) => a.findIndex((v2) => v2.player.id === v.player.id) === i
+  //       );
+  //       filteredData.sort((a, b) => (a.player.name > b.player.name ? 1 : -1));
+  //       setPlayers(filteredData);
+  //     })
+  //     .catch((err) => console.log(err));
+  //   setLoading(false);
+  // }
 
   useEffect(() => {
-    fetchPlayers();
+    // fetchPlayers();
+    const filteredData = players.filter(
+      (v, i, a) => a.findIndex((v2) => v2.player.id === v.player.id) === i
+    );
+    filteredData.sort((a, b) =>
+      a.player.lastname > b.player.lastname ? 1 : -1
+    );
+    setPlayers(filteredData);
+    setLoading(false);
   }, []);
 
   const randomFootballer = useCallback(() => {
     const i = getRandomInt(players.length);
+
     setFootballer(players[i]);
   }, [players]);
 
@@ -49,7 +61,19 @@ function App() {
   }, [players, randomFootballer]);
 
   useEffect(() => {
-    if (noOfGuesses >= 8) {
+    try {
+      const apps = footballer.statistics[0].games.appearences;
+      if (apps <= 10) {
+        randomFootballer();
+      }
+    } catch {
+      console.log('Loading...');
+    }
+  }, [footballer]);
+
+  useEffect(() => {
+    setInputValue('');
+    if (noOfGuesses >= maxGuesses) {
       setGameOver(true);
     }
   }, [noOfGuesses]);
@@ -58,16 +82,22 @@ function App() {
     const lastGuess = guesses[guesses.length - 1];
     if (!loading && footballer && lastGuess === footballer.player.name) {
       setWon(true);
-    } else if (noOfGuesses >= 8) {
+    } else if (noOfGuesses >= maxGuesses) {
       setGameOver(true);
     }
   }, [guesses, footballer, noOfGuesses, loading]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setGuess(e.target.elements[0].value);
     const name = e.target.elements[0].value;
+    setInputValue('');
+    setActualValue(null);
     const guessedPlayer = players.find((player) => player.player.name === name);
+    setPlayers((prev) => {
+      const index = prev.indexOf(guessedPlayer);
+      prev.splice(index, 1);
+      return prev;
+    });
     if (guessedPlayer.player.name === footballer.player.name) {
       setWon(true);
       setGameOver(true);
@@ -104,9 +134,14 @@ function App() {
       </div>
       {!gameOver && !loading && (
         <SearchBox
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          actualValue={actualValue}
+          setActualValue={setActualValue}
           players={players}
           handleSubmit={handleSubmit}
           noOfGuesses={noOfGuesses}
+          maxGuesses={maxGuesses}
         />
       )}
       {won && (

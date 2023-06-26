@@ -47,7 +47,7 @@ function PlayerCard({ player, gameOver }) {
           !gameOver ? 'invisible' : ''
         } top-2 right-2 w-16`}
         src={flag.image}
-        alt="flag-img"
+        alt={nationality}
       />
     </div>
   );

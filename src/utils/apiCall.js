@@ -31,7 +31,7 @@ export default async function apiCall() {
       sleep(5000);
       page += 1;
     } catch (err) {
-      console.error(`Oeps, something is wrong ${err}`);
+      console.error(`Oops, something is wrong ${err}`);
       pages = 0;
     }
     // keep running until there's no next page

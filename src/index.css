@@ -173,9 +173,22 @@ body {
 }
 
 .guess-number,
-h2.won {
+h2.won, h2.lost {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.won, .lost {
+  background-color: var(--clr-primary);
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: var(--clr-neutral-800);
+  border: 2px solid red;
+  margin-bottom: 0.75rem;
+}
+
+.lost {
+  color: red;
 }
 
 [name="searchBox"] {

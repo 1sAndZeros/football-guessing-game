@@ -1,14 +1,25 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { useState } from 'react';
 
-function SearchBox({ players, handleSubmit, noOfGuesses }) {
+function SearchBox({
+  handleSubmit,
+  noOfGuesses,
+  maxGuesses,
+  inputValue,
+  setInputValue,
+  actualValue,
+  setActualValue,
+  players,
+}) {
   const options = players.map((player) => {
     return {
       id: player.player.id,
       name: player.player.name,
       photo: player.player.photo,
       team: player.statistics[0].team.logo,
+      position: player.statistics[0].games.position,
     };
   });
   return (
@@ -21,6 +32,15 @@ function SearchBox({ players, handleSubmit, noOfGuesses }) {
             name="searchBox"
             options={options}
             autoHighlight
+            clearOnEscape
+            value={actualValue}
+            onChange={(_, newValue) => {
+              setActualValue(newValue);
+            }}
+            inputValue={inputValue}
+            onInputChange={(_, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
             getOptionLabel={(option) => `${option.name}`}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderOption={(props, option) => (
@@ -63,7 +83,7 @@ function SearchBox({ players, handleSubmit, noOfGuesses }) {
           />
         )}
         <button type="submit" className="guess-btn">
-          {`Guess ${noOfGuesses + 1} of 6`}
+          {`Guess ${noOfGuesses + 1} of ${maxGuesses}`}
         </button>
       </div>
     </form>
