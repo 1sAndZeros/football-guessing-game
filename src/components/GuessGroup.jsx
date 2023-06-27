@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import { motion, animate, stagger } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Bubble from './Bubble';
 import positions from '../data/positions';
 import flags from '../data/flags.json';
 import useTraceUpdate from '../utils/useTraceUpdate';
 
 function GuessGroup({ guess, footballer }) {
+  const delay = 0.5;
   let flag = '';
   Object.keys(flags).forEach((key) => {
     if (flags[key].name === guess.player.nationality) {
@@ -95,10 +95,11 @@ function GuessGroup({ guess, footballer }) {
       })} */}
       <Bubble
         key={`${guessedStats.id}-player`}
-        name="player"
+        name="player-bubble"
         stat={statObj.photo}
         type="image"
         correct={guessedStats.name === correctStats.name}
+        delay={1 * delay}
       />
       <Bubble
         key={`${guessedStats.id}-team`}
@@ -106,6 +107,7 @@ function GuessGroup({ guess, footballer }) {
         stat={statObj.team}
         type="image"
         correct={guessedStats.team.name === correctStats.team.name}
+        delay={2 * delay}
       />
       <Bubble
         key={`${guessedStats.id}-age`}
@@ -113,6 +115,7 @@ function GuessGroup({ guess, footballer }) {
         stat={statObj.age}
         type="number"
         correct={guessedStats.age === correctStats.age}
+        delay={3 * delay}
       />
       <Bubble
         key={`${guessedStats.id}-nationality`}
@@ -122,6 +125,7 @@ function GuessGroup({ guess, footballer }) {
         correct={
           guessedStats.nationality.name === correctStats.nationality.name
         }
+        delay={4 * delay}
       />
       <Bubble
         key={`${guessedStats.id}-position`}
@@ -129,6 +133,7 @@ function GuessGroup({ guess, footballer }) {
         stat={statObj.position}
         type="text"
         correct={guessedStats.position === correctStats.position}
+        delay={5 * delay}
       />
     </motion.div>
   );

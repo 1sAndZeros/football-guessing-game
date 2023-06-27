@@ -14,41 +14,23 @@ function PlayerCard({ player, gameOver }) {
   });
 
   return (
-    <div
-      className={`player-card flex justify-center align-middle ${
-        !gameOver ? 'hidden' : ''
-      }`}
-    >
-      <div className="player mx-14">
-        <img className="w-40" src={photo} alt={name} />
-        <div className="player-name mt-2">{name}</div>
+    <div className={`player-card ${!gameOver ? 'hidden' : ''}`}>
+      <div className="player">
+        <img src={photo} alt={name} />
+        <div className="player-name">{name}</div>
       </div>
       <img
-        className={`absolute ${!gameOver ? 'invisible' : ''} top-2 left-2 w-16`}
+        className={`${!gameOver ? 'invisible' : ''} left-2`}
         src={logo}
         alt="team-logo"
       />
-      <h3
-        className={`grid place-items-center absolute ${
-          !gameOver ? 'invisible' : ''
-        } bottom-2 right-2 bg-slate-600 w-16 h-16 rounded-full`}
-      >
-        {age}
-      </h3>
-      <div
-        className={`grid place-items-center absolute ${
-          !gameOver ? 'invisible' : ''
-        } bottom-2 left-2 bg-slate-600 w-16 h-16 rounded-full`}
-      >
-        <h3 className="">{position}</h3>
-      </div>
       <img
-        className={`absolute ${
-          !gameOver ? 'invisible' : ''
-        } top-2 right-2 w-16`}
+        className={`${!gameOver ? 'invisible' : ''} right-2`}
         src={flag.image}
         alt={nationality}
       />
+      <h3 className={`${!gameOver ? 'invisible' : ''} right-2`}>{age}</h3>
+      <h3 className={`${!gameOver ? 'invisible' : ''} left-2`}>{position}</h3>
     </div>
   );
 }

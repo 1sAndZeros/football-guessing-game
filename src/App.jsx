@@ -44,7 +44,7 @@ function App() {
       (v, i, a) => a.findIndex((v2) => v2.player.id === v.player.id) === i
     );
     filteredData.sort((a, b) =>
-      a.player.lastname > b.player.lastname ? 1 : -1
+      a.statistics[0].team.name > b.statistics[0].team.name ? 1 : -1
     );
     setPlayers(filteredData);
     setLoading(false);

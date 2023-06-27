@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 function Bubble(props) {
-  const { stat, name, type, correct } = props;
+  const { stat, name, type, correct, delay } = props;
 
   let answer;
   if (correct) {
@@ -16,10 +16,12 @@ function Bubble(props) {
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
         scale: [0, 1.5, 1],
       }}
+      transition={{ duration: 1, delay }}
       className={`placeholder avatar icon ${
         correct ? 'correct' : ''
       } ${answer} ${name}`}

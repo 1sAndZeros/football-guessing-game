@@ -117,6 +117,7 @@ body {
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   border-radius: 1.5rem;
   overflow: hidden;
   padding: 1.5rem;
@@ -137,8 +138,32 @@ body {
   gap: 1.5rem;
 }
 
+.player-card > img {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 0.5rem;
+  width: 4rem;
+}
+
+.player-card > h3 {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--clr-neutral-400);
+  color: rgb(0, 0, 0);
+  bottom: 0.5rem;
+  border-radius: 9999px;
+}
+
 .player-name {
+  position: static !important;
   overflow-wrap: break-word;
+  margin-top: 0.5rem;
+  width: auto !important;
+  height: auto !important;
 }
 
 .player-card.hidden .player-name,
@@ -169,7 +194,13 @@ body {
 
 .player {
   filter: none;
+  margin-left: 3.5rem;
+  margin-right: 3.5rem;
   transition: filter 1500ms ease-in;
+}
+
+.player > img {
+  width: 10rem;
 }
 
 .guess-number,

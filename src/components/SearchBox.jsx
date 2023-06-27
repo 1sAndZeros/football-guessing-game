@@ -1,7 +1,7 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { useState } from 'react';
 
 function SearchBox({
   handleSubmit,
@@ -19,6 +19,7 @@ function SearchBox({
       name: player.player.name,
       photo: player.player.photo,
       team: player.statistics[0].team.logo,
+      teamName: player.statistics[0].team.name,
       position: player.statistics[0].games.position,
     };
   });
@@ -41,6 +42,7 @@ function SearchBox({
             onInputChange={(_, newInputValue) => {
               setInputValue(newInputValue);
             }}
+            groupBy={(option) => option.teamName}
             getOptionLabel={(option) => `${option.name}`}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderOption={(props, option) => (
@@ -70,7 +72,6 @@ function SearchBox({
                 />
               </Box>
             )}
-            // eslint-disable-next-line react/jsx-props-no-spreading
             renderInput={(params) => (
               <TextField
                 {...params}
