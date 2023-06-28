@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 import './App.css';
 import Title from './components/Title';
 import GuessGroup from './components/GuessGroup';
@@ -17,6 +17,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
   const [actualValue, setActualValue] = useState(null);
   const maxGuesses = 8;
+  const playerCard = useRef();
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -59,6 +60,14 @@ function App() {
   useEffect(() => {
     randomFootballer();
   }, [players, randomFootballer]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }, [gameOver]);
 
   useEffect(() => {
     try {
@@ -124,7 +133,11 @@ function App() {
       {!footballer ? (
         <h3>Loading...</h3>
       ) : (
-        <PlayerCard gameOver={won || gameOver} player={footballer} />
+        <PlayerCard
+          ref={playerCard}
+          gameOver={won || gameOver}
+          player={footballer}
+        />
       )}
       <div className="flex flex-col gap-2 mb-6">
         {guesses.length > 0 &&

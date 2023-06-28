@@ -188,7 +188,7 @@ body {
 }
 
 .player-card.hidden .player {
-  filter: blur(15px);
+  filter: blur(15px) grayscale(1);
   transition: none;
 }
 

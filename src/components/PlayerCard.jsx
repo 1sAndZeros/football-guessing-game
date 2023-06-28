@@ -1,7 +1,7 @@
 import positions from '../data/positions';
 import flags from '../data/flags.json';
 
-function PlayerCard({ player, gameOver }) {
+function PlayerCard({ player, gameOver, ref }) {
   const { logo } = player.statistics[0].team;
   const { age, nationality, photo, name } = player.player;
   const position = positions[player.statistics[0].games.position];
@@ -15,7 +15,7 @@ function PlayerCard({ player, gameOver }) {
 
   return (
     <div className={`player-card ${!gameOver ? 'hidden' : ''}`}>
-      <div className="player">
+      <div className="player" ref={ref}>
         <img src={photo} alt={name} />
         <div className="player-name">{name}</div>
       </div>
