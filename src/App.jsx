@@ -16,7 +16,7 @@ function App() {
   const [noOfGuesses, setNoOfGuesses] = useState(0);
   const [inputValue, setInputValue] = useState('');
   const [actualValue, setActualValue] = useState(null);
-  const maxGuesses = 8;
+  const maxGuesses = 3;
   const playerCard = useRef();
 
   function getRandomInt(max) {
@@ -122,7 +122,15 @@ function App() {
     setGameOver(false);
     setGuesses([]);
     setNoOfGuesses(0);
-    setPlayers(premPlayers);
+    setPlayers(() => {
+      const filteredData = players.filter(
+        (v, i, a) => a.findIndex((v2) => v2.player.id === v.player.id) === i
+      );
+      filteredData.sort((a, b) =>
+        a.statistics[0].team.name > b.statistics[0].team.name ? 1 : -1
+      );
+      return filteredData;
+    });
     setFootballer();
     randomFootballer();
   }
