@@ -16,7 +16,7 @@ function App() {
   const [noOfGuesses, setNoOfGuesses] = useState(0);
   const [inputValue, setInputValue] = useState('');
   const [actualValue, setActualValue] = useState(null);
-  const maxGuesses = 3;
+  const maxGuesses = 8;
   const playerCard = useRef();
 
   function getRandomInt(max) {
